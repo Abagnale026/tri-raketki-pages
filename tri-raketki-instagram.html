@@ -1,0 +1,1353 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Упаковка Instagram — Три Ракетки</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap');
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --bg: #0d0d12;
+    --bg2: #13131a;
+    --bg3: #1a1a24;
+    --border: rgba(255,255,255,0.07);
+    --orange: #ff6b2b;
+    --orange-dim: rgba(255,107,43,0.12);
+    --orange-glow: rgba(255,107,43,0.25);
+    --purple: #8b6cf7;
+    --purple-dim: rgba(139,108,247,0.12);
+    --green: #3ecf8e;
+    --green-dim: rgba(62,207,142,0.12);
+    --red: #f05252;
+    --red-dim: rgba(240,82,82,0.1);
+    --text: #f0f0f5;
+    --text-muted: #7a7a90;
+    --text-dim: #4a4a60;
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'Inter', -apple-system, sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    line-height: 1.6;
+    font-size: 15px;
+  }
+
+  /* ── HEADER ── */
+  .hero {
+    background: linear-gradient(135deg, #0d0d12 0%, #1a1030 50%, #0d0d12 100%);
+    border-bottom: 1px solid var(--border);
+    padding: 60px 24px 48px;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+  .hero::before {
+    content: '';
+    position: absolute;
+    top: -80px; left: 50%; transform: translateX(-50%);
+    width: 600px; height: 600px;
+    background: radial-gradient(circle, rgba(255,107,43,0.08) 0%, transparent 70%);
+    pointer-events: none;
+  }
+  .hero-badge {
+    display: inline-block;
+    background: var(--orange-dim);
+    border: 1px solid rgba(255,107,43,0.3);
+    color: var(--orange);
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    padding: 6px 14px;
+    border-radius: 20px;
+    margin-bottom: 20px;
+  }
+  .hero h1 {
+    font-size: clamp(32px, 5vw, 56px);
+    font-weight: 900;
+    letter-spacing: -0.02em;
+    line-height: 1.1;
+    margin-bottom: 12px;
+  }
+  .hero h1 span { color: var(--orange); }
+  .hero-sub {
+    color: var(--text-muted);
+    font-size: 16px;
+    max-width: 480px;
+    margin: 0 auto 32px;
+  }
+  .hero-sports {
+    display: flex;
+    gap: 10px;
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+  .sport-chip {
+    background: var(--bg3);
+    border: 1px solid var(--border);
+    padding: 6px 16px;
+    border-radius: 20px;
+    font-size: 13px;
+    font-weight: 500;
+  }
+
+  /* ── LAYOUT ── */
+  .container { max-width: 860px; margin: 0 auto; padding: 0 24px; }
+
+  /* ── NAV ── */
+  .toc {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    background: rgba(13,13,18,0.92);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--border);
+    padding: 0 24px;
+    overflow-x: auto;
+  }
+  .toc-inner {
+    display: flex;
+    gap: 0;
+    max-width: 860px;
+    margin: 0 auto;
+    white-space: nowrap;
+  }
+  .toc a {
+    display: inline-block;
+    padding: 14px 16px;
+    font-size: 13px;
+    font-weight: 500;
+    color: var(--text-muted);
+    text-decoration: none;
+    border-bottom: 2px solid transparent;
+    transition: all 0.2s;
+  }
+  .toc a:hover { color: var(--text); border-bottom-color: var(--orange); }
+
+  /* ── SECTIONS ── */
+  .section { padding: 56px 0 0; }
+  .section:last-of-type { padding-bottom: 80px; }
+
+  .section-label {
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--orange);
+    margin-bottom: 8px;
+  }
+  .section-title {
+    font-size: clamp(22px, 3vw, 30px);
+    font-weight: 800;
+    letter-spacing: -0.02em;
+    margin-bottom: 6px;
+  }
+  .section-desc {
+    color: var(--text-muted);
+    font-size: 14px;
+    margin-bottom: 28px;
+  }
+  .section-divider {
+    height: 1px;
+    background: var(--border);
+    margin: 56px 0 0;
+  }
+
+  /* ── CARDS ── */
+  .card {
+    background: var(--bg2);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    padding: 24px;
+    margin-bottom: 16px;
+  }
+  .card:last-child { margin-bottom: 0; }
+  .card-title {
+    font-size: 13px;
+    font-weight: 700;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    color: var(--text-muted);
+    margin-bottom: 12px;
+  }
+
+  /* ── COMPETITOR TABLE ── */
+  .competitor-block {
+    background: var(--bg2);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    margin-bottom: 20px;
+    overflow: hidden;
+  }
+  .competitor-header {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    padding: 20px 24px;
+    border-bottom: 1px solid var(--border);
+    background: var(--bg3);
+  }
+  .competitor-avatar {
+    width: 44px; height: 44px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, #667eea, #764ba2);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 18px;
+    flex-shrink: 0;
+  }
+  .competitor-name { font-weight: 700; font-size: 16px; }
+  .competitor-handle { color: var(--text-muted); font-size: 13px; }
+  .comp-table { width: 100%; border-collapse: collapse; }
+  .comp-table tr { border-bottom: 1px solid var(--border); }
+  .comp-table tr:last-child { border-bottom: none; }
+  .comp-table td { padding: 12px 24px; font-size: 14px; vertical-align: top; }
+  .comp-table td:first-child {
+    width: 130px;
+    color: var(--text-muted);
+    font-weight: 600;
+    font-size: 13px;
+    white-space: nowrap;
+  }
+  .badge-good {
+    display: inline-block;
+    background: var(--green-dim);
+    color: var(--green);
+    font-size: 11px; font-weight: 700;
+    padding: 2px 8px; border-radius: 4px;
+    margin-right: 6px;
+  }
+  .badge-bad {
+    display: inline-block;
+    background: var(--red-dim);
+    color: var(--red);
+    font-size: 11px; font-weight: 700;
+    padding: 2px 8px; border-radius: 4px;
+    margin-right: 6px;
+  }
+
+  /* ── INSIGHT BOXES ── */
+  .insight-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-top: 24px; }
+  @media (max-width: 600px) { .insight-grid { grid-template-columns: 1fr; } }
+
+  .insight-box {
+    border-radius: 14px;
+    padding: 20px;
+  }
+  .insight-box.green { background: var(--green-dim); border: 1px solid rgba(62,207,142,0.2); }
+  .insight-box.orange { background: var(--orange-dim); border: 1px solid rgba(255,107,43,0.2); }
+  .insight-box .ib-title {
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    margin-bottom: 12px;
+  }
+  .insight-box.green .ib-title { color: var(--green); }
+  .insight-box.orange .ib-title { color: var(--orange); }
+  .insight-box ul { list-style: none; }
+  .insight-box ul li {
+    font-size: 13px;
+    padding: 4px 0;
+    padding-left: 20px;
+    position: relative;
+    color: var(--text);
+  }
+  .insight-box ul li::before {
+    position: absolute;
+    left: 0;
+    top: 4px;
+  }
+  .insight-box.green ul li::before { content: '✓'; color: var(--green); font-weight: 700; }
+  .insight-box.orange ul li::before { content: '→'; color: var(--orange); font-weight: 700; }
+
+  .diff-box {
+    background: linear-gradient(135deg, rgba(255,107,43,0.08), rgba(139,108,247,0.08));
+    border: 1px solid rgba(255,107,43,0.2);
+    border-radius: 14px;
+    padding: 20px 24px;
+    margin-top: 16px;
+  }
+  .diff-box .diff-label {
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--orange);
+    margin-bottom: 8px;
+  }
+  .diff-box p { font-size: 14px; line-height: 1.7; }
+  .diff-box strong { color: var(--orange); }
+
+  /* ── NICKNAME OPTIONS ── */
+  .nick-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; }
+  @media (max-width: 600px) { .nick-grid { grid-template-columns: 1fr; } }
+
+  .nick-card {
+    background: var(--bg2);
+    border: 2px solid var(--border);
+    border-radius: 14px;
+    padding: 20px;
+    transition: border-color 0.2s;
+    cursor: default;
+  }
+  .nick-card.recommended {
+    border-color: var(--orange);
+    background: linear-gradient(135deg, var(--bg2), rgba(255,107,43,0.05));
+  }
+  .nick-tag {
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    padding: 3px 8px;
+    border-radius: 4px;
+    margin-bottom: 10px;
+    display: inline-block;
+  }
+  .tag-rec { background: var(--orange-dim); color: var(--orange); }
+  .tag-alt { background: var(--bg3); color: var(--text-muted); }
+  .nick-handle {
+    font-size: 22px;
+    font-weight: 800;
+    letter-spacing: -0.02em;
+    margin-bottom: 8px;
+  }
+  .nick-desc { font-size: 13px; color: var(--text-muted); line-height: 1.5; }
+
+  /* ── BIO MOCKUP ── */
+  .bio-variants { display: flex; flex-direction: column; gap: 16px; }
+  .bio-card {
+    background: var(--bg2);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    overflow: hidden;
+  }
+  .bio-card-header {
+    padding: 14px 20px;
+    border-bottom: 1px solid var(--border);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  .bio-style-name { font-size: 12px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.08em; color: var(--text-muted); }
+  .bio-chars { font-size: 12px; color: var(--green); font-weight: 600; }
+  .bio-mockup {
+    background: #1c1c1e;
+    padding: 16px 20px;
+    border-bottom: 1px solid var(--border);
+  }
+  .bio-mock-name { font-size: 14px; font-weight: 700; margin-bottom: 4px; }
+  .bio-mock-text { font-size: 13px; line-height: 1.6; white-space: pre-line; }
+  .bio-mock-link { color: #4b9cf5; font-size: 13px; margin-top: 4px; }
+  .bio-note { padding: 12px 20px; font-size: 13px; color: var(--text-muted); }
+
+  /* ── HIGHLIGHTS ── */
+  .highlights-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 12px;
+  }
+  .hl-card {
+    background: var(--bg2);
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    padding: 16px 18px;
+  }
+  .hl-card.priority { border-color: rgba(255,107,43,0.3); }
+  .hl-emoji { font-size: 24px; margin-bottom: 8px; display: block; }
+  .hl-name {
+    font-size: 14px;
+    font-weight: 700;
+    margin-bottom: 4px;
+  }
+  .hl-desc { font-size: 12px; color: var(--text-muted); line-height: 1.5; }
+  .hl-priority {
+    display: inline-block;
+    font-size: 10px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    color: var(--orange);
+    background: var(--orange-dim);
+    padding: 2px 7px;
+    border-radius: 4px;
+    margin-bottom: 6px;
+  }
+
+  /* ── PINNED POSTS ── */
+  .pinned-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; }
+  @media (max-width: 600px) { .pinned-grid { grid-template-columns: 1fr; } }
+
+  .pin-card {
+    background: var(--bg2);
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    overflow: hidden;
+  }
+  .pin-header {
+    padding: 14px 16px 10px;
+    border-bottom: 1px solid var(--border);
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  .pin-number {
+    width: 28px; height: 28px;
+    border-radius: 50%;
+    background: var(--orange);
+    color: white;
+    font-weight: 800;
+    font-size: 13px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+  }
+  .pin-type { font-size: 11px; font-weight: 700; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.06em; }
+  .pin-body { padding: 14px 16px; }
+  .pin-hook {
+    font-size: 14px;
+    font-weight: 700;
+    color: var(--text);
+    margin-bottom: 10px;
+    line-height: 1.4;
+    font-style: italic;
+  }
+  .pin-hook::before { content: '"'; }
+  .pin-hook::after { content: '"'; }
+  .pin-list { list-style: none; }
+  .pin-list li {
+    font-size: 12px;
+    color: var(--text-muted);
+    padding: 3px 0 3px 16px;
+    position: relative;
+    line-height: 1.5;
+  }
+  .pin-list li::before { content: '·'; position: absolute; left: 4px; color: var(--orange); font-weight: 700; }
+  .pin-format {
+    margin-top: 10px;
+    padding-top: 10px;
+    border-top: 1px solid var(--border);
+    font-size: 11px;
+    color: var(--purple);
+    font-weight: 600;
+  }
+
+  /* ── CONTENT PLAN ── */
+  .rubric-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 24px; }
+  @media (max-width: 600px) { .rubric-grid { grid-template-columns: 1fr; } }
+
+  .rubric-card {
+    background: var(--bg2);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 16px;
+    display: flex;
+    gap: 12px;
+    align-items: flex-start;
+  }
+  .rubric-icon { font-size: 22px; flex-shrink: 0; }
+  .rubric-name { font-size: 14px; font-weight: 700; margin-bottom: 3px; }
+  .rubric-note { font-size: 12px; color: var(--text-muted); line-height: 1.5; }
+
+  .freq-row {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 12px;
+    margin-bottom: 24px;
+  }
+  @media (max-width: 500px) { .freq-row { grid-template-columns: 1fr; } }
+
+  .freq-card {
+    background: var(--bg2);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 16px;
+    text-align: center;
+  }
+  .freq-num {
+    font-size: 28px;
+    font-weight: 900;
+    color: var(--orange);
+    letter-spacing: -0.02em;
+    line-height: 1;
+    margin-bottom: 4px;
+  }
+  .freq-label { font-size: 12px; color: var(--text-muted); }
+
+  .mix-bar {
+    background: var(--bg2);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 20px;
+    margin-bottom: 24px;
+  }
+  .mix-title { font-size: 12px; font-weight: 700; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 14px; }
+  .mix-row { display: flex; align-items: center; gap: 12px; margin-bottom: 10px; }
+  .mix-row:last-child { margin-bottom: 0; }
+  .mix-label { font-size: 13px; width: 200px; flex-shrink: 0; }
+  .mix-track { flex: 1; height: 8px; background: var(--bg3); border-radius: 4px; overflow: hidden; }
+  .mix-fill { height: 100%; border-radius: 4px; }
+  .mix-pct { font-size: 13px; font-weight: 700; width: 36px; text-align: right; flex-shrink: 0; color: var(--text-muted); }
+
+  /* ── WEEK GRID ── */
+  .week-grid { display: flex; flex-direction: column; gap: 6px; }
+  .week-row {
+    display: grid;
+    grid-template-columns: 40px 1fr;
+    gap: 12px;
+    align-items: start;
+    background: var(--bg2);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 12px 16px;
+  }
+  .week-day {
+    font-size: 12px;
+    font-weight: 700;
+    color: var(--text-muted);
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    padding-top: 2px;
+  }
+  .week-content { font-size: 13px; line-height: 1.5; }
+  .week-tag {
+    display: inline-block;
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    padding: 2px 7px;
+    border-radius: 4px;
+    margin-right: 6px;
+    vertical-align: middle;
+  }
+  .wtag-test { background: rgba(255,107,43,0.15); color: var(--orange); }
+  .wtag-product { background: rgba(139,108,247,0.15); color: var(--purple); }
+  .wtag-community { background: rgba(62,207,142,0.15); color: var(--green); }
+  .wtag-brand { background: rgba(251,191,36,0.15); color: #fbbf24; }
+  .wtag-personal { background: rgba(59,130,246,0.15); color: #60a5fa; }
+
+  /* ── CHECKLIST ── */
+  .checklist {
+    background: var(--bg2);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    overflow: hidden;
+  }
+  .checklist-header {
+    padding: 20px 24px;
+    border-bottom: 1px solid var(--border);
+    background: var(--bg3);
+    font-weight: 700;
+    font-size: 15px;
+  }
+  .cl-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 14px;
+    padding: 14px 24px;
+    border-bottom: 1px solid var(--border);
+    transition: background 0.15s;
+  }
+  .cl-item:last-child { border-bottom: none; }
+  .cl-item:hover { background: var(--bg3); }
+  .cl-box {
+    width: 20px; height: 20px;
+    border: 2px solid rgba(255,107,43,0.4);
+    border-radius: 5px;
+    flex-shrink: 0;
+    margin-top: 1px;
+  }
+  .cl-text { font-size: 14px; line-height: 1.5; }
+  .cl-text span { color: var(--text-muted); font-size: 13px; display: block; margin-top: 1px; }
+  .cl-priority {
+    margin-left: auto;
+    font-size: 10px;
+    font-weight: 700;
+    padding: 3px 8px;
+    border-radius: 4px;
+    flex-shrink: 0;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+  }
+  .p-hot { background: var(--orange-dim); color: var(--orange); }
+  .p-week { background: var(--purple-dim); color: var(--purple); }
+
+  /* ── LINK SECTION ── */
+  .taplink-mock {
+    background: #1a1a24;
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    padding: 20px;
+    max-width: 360px;
+  }
+  .taplink-btn {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    background: var(--bg3);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 12px 16px;
+    margin-bottom: 8px;
+    font-size: 14px;
+    font-weight: 500;
+  }
+  .taplink-btn:last-child { margin-bottom: 0; }
+  .taplink-btn .btn-icon { font-size: 18px; width: 24px; text-align: center; }
+
+  /* ── AVATAR TIPS ── */
+  .avatar-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+  @media (max-width: 500px) { .avatar-grid { grid-template-columns: 1fr; } }
+
+  .av-card {
+    background: var(--bg2);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 16px;
+  }
+  .av-card.avoid { border-color: rgba(240,82,82,0.2); background: var(--red-dim); }
+  .av-title { font-size: 12px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 10px; }
+  .av-title.good { color: var(--green); }
+  .av-title.bad { color: var(--red); }
+  .av-list { list-style: none; }
+  .av-list li { font-size: 13px; padding: 3px 0 3px 18px; position: relative; line-height: 1.5; }
+  .av-card:not(.avoid) .av-list li::before { content: '✓'; position: absolute; left: 0; color: var(--green); font-weight: 700; }
+  .av-card.avoid .av-list li::before { content: '✗'; position: absolute; left: 0; color: var(--red); font-weight: 700; }
+
+  /* ── FOOTER ── */
+  .footer {
+    border-top: 1px solid var(--border);
+    padding: 32px 24px;
+    text-align: center;
+    color: var(--text-dim);
+    font-size: 13px;
+  }
+
+  /* ── UTILS ── */
+  .mt16 { margin-top: 16px; }
+  .mt24 { margin-top: 24px; }
+  .orange { color: var(--orange); }
+  .green { color: var(--green); }
+</style>
+</head>
+<body>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-badge">Instagram Profile Packaging</div>
+  <h1>Три <span>Ракетки</span></h1>
+  <p class="hero-sub">Полная упаковка профиля Instagram для магазина ракеточного спорта · Пермь</p>
+  <div class="hero-sports">
+    <div class="sport-chip">🏸 Бадминтон</div>
+    <div class="sport-chip">🟡 Падел</div>
+    <div class="sport-chip">⚫ Сквош</div>
+    <div class="sport-chip">👕 Three Rackets Brand</div>
+    <div class="sport-chip">🌐 triraketki.ru</div>
+  </div>
+</div>
+
+<!-- NAV -->
+<nav class="toc">
+  <div class="toc-inner">
+    <a href="#competitors">Конкуренты</a>
+    <a href="#nickname">Никнейм</a>
+    <a href="#name">Имя</a>
+    <a href="#bio">Bio</a>
+    <a href="#link">Ссылка</a>
+    <a href="#avatar">Аватарка</a>
+    <a href="#highlights">Актуальные</a>
+    <a href="#pinned">Закреп</a>
+    <a href="#content">Контент</a>
+    <a href="#checklist">Чеклист</a>
+  </div>
+</nav>
+
+<div class="container">
+
+  <!-- ═══════════════════════════════════ КОНКУРЕНТЫ -->
+  <div class="section" id="competitors">
+    <div class="section-label">Шаг 0</div>
+    <div class="section-title">🔍 Анализ конкурентов</div>
+    <div class="section-desc">Разбор двух аккаунтов из ниши — что взять, где выиграть</div>
+
+    <!-- Competitor 1 -->
+    <div class="competitor-block">
+      <div class="competitor-header">
+        <div class="competitor-avatar">🏸</div>
+        <div>
+          <div class="competitor-name">Badmintonist.com</div>
+          <div class="competitor-handle">@badmintonist_com</div>
+        </div>
+      </div>
+      <table class="comp-table">
+        <tr>
+          <td>Никнейм</td>
+          <td><span class="badge-good">ХОРОШО</span> Совпадает с доменом, легко найти</td>
+        </tr>
+        <tr>
+          <td>Имя</td>
+          <td><span class="badge-bad">СЛАБО</span> «Badmintonist.com» — нет ключевых слов, нет эмоции</td>
+        </tr>
+        <tr>
+          <td>Bio</td>
+          <td><span class="badge-bad">СЛАБО</span> «товары для 🏸🏓⚫️ | доставка» — три слова, ноль смысла. Не отвечает на вопрос «почему вы»</td>
+        </tr>
+        <tr>
+          <td>Аватарка</td>
+          <td>Логотип — безлично, нет ощущения живого бренда</td>
+        </tr>
+        <tr>
+          <td>Актуальные</td>
+          <td><span class="badge-bad">СЛАБО</span> Судя по bio — минимальные или отсутствуют</td>
+        </tr>
+        <tr>
+          <td>Контент</td>
+          <td><span class="badge-bad">СЛАБО</span> Только товарные посты, нет тестов, нет обзоров, нет личного</td>
+        </tr>
+      </table>
+    </div>
+
+    <!-- Competitor 2 -->
+    <div class="competitor-block">
+      <div class="competitor-header">
+        <div class="competitor-avatar" style="background: linear-gradient(135deg, #f093fb, #f5576c);">🏪</div>
+        <div>
+          <div class="competitor-name">Буквально всё для бадминтона!</div>
+          <div class="competitor-handle">@badm_store · 3 714 подписчиков</div>
+        </div>
+      </div>
+      <table class="comp-table">
+        <tr>
+          <td>Никнейм</td>
+          <td><span class="badge-good">ХОРОШО</span> Короткий, запоминается. Но только про бадминтон</td>
+        </tr>
+        <tr>
+          <td>Имя</td>
+          <td><span class="badge-bad">СЛАБО</span> «Буквально всё для бадминтона!» — имя занято восклицанием, нет ключей для поиска</td>
+        </tr>
+        <tr>
+          <td>Bio</td>
+          <td><span class="badge-bad">СЛАБО</span> «Ассортимент, качество, цена» — это говорят ВСЕ магазины всего мира. Нет отличия</td>
+        </tr>
+        <tr>
+          <td>Аватарка</td>
+          <td>Логотип — нет лица бренда, нет команды</td>
+        </tr>
+        <tr>
+          <td>Актуальные</td>
+          <td>Есть «Ракетки» — только товарная категория, не продающее хранилище</td>
+        </tr>
+        <tr>
+          <td>Ссылка</td>
+          <td><span class="badge-good">ХОРОШО</span> Мультиссылка с 4 кнопками — правильно</td>
+        </tr>
+        <tr>
+          <td>Контент</td>
+          <td><span class="badge-bad">СЛАБО</span> Только бадминтон, нет тестов, нет сообщества, нет обзоров</td>
+        </tr>
+      </table>
+    </div>
+
+    <!-- Insights -->
+    <div class="insight-grid">
+      <div class="insight-box green">
+        <div class="ib-title">🔍 Что объединяет конкурентов</div>
+        <ul>
+          <li>Мультиссылка в профиле (взять)</li>
+          <li>Короткий никнейм без лишних символов</li>
+          <li>Упоминание видов спорта в профиле</li>
+        </ul>
+      </div>
+      <div class="insight-box orange">
+        <div class="ib-title">⚡ Где у всех пробелы — ваш шанс</div>
+        <ul>
+          <li>Никто не делает тесты и обзоры</li>
+          <li>Никто не охватывает сквош и падел</li>
+          <li>Нет собственного бренда одежды</li>
+          <li>Нет сообщества — «мы тоже играем»</li>
+          <li>Bio у всех — шаблонный товарный</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="diff-box">
+      <div class="diff-label">🎯 Ваше отличие на фоне конкурентов</div>
+      <p>Три Ракетки — <strong>единственный магазин в Перми, который охватывает все три ракеточных спорта</strong>, делает живой контент от людей, которые сами играют, и продаёт собственный бренд одежды <strong>Three Rackets</strong>. Конкуренты — просто витрины. Вы — сообщество.</p>
+    </div>
+  </div>
+
+  <div class="section-divider"></div>
+
+  <!-- ═══════════════════════════════════ НИКНЕЙМ -->
+  <div class="section" id="nickname">
+    <div class="section-label">Блок 1</div>
+    <div class="section-title">📛 Никнейм</div>
+    <div class="section-desc">3 варианта — проверь доступность на instagram.com/[никнейм]</div>
+
+    <div class="nick-grid">
+      <div class="nick-card recommended">
+        <div class="nick-tag tag-rec">★ Рекомендуем</div>
+        <div class="nick-handle orange">@triraketki</div>
+        <div class="nick-desc">Совпадает с доменом triraketki.ru — один никнейм везде. Легко произносится, легко ищется. Содержит цифру «три» в слове — уникально</div>
+      </div>
+      <div class="nick-card">
+        <div class="nick-tag tag-alt">Вариант 2</div>
+        <div class="nick-handle">@tri.raketki</div>
+        <div class="nick-desc">Если @triraketki занят — точка делит слова, читается лучше. Тот же смысл, та же логика</div>
+      </div>
+      <div class="nick-card">
+        <div class="nick-tag tag-alt">Вариант 3</div>
+        <div class="nick-handle">@3raketki</div>
+        <div class="nick-desc">Цифра вместо слова — выделяется в поиске, коротко. Минус: цифра в начале нестандартна</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="section-divider"></div>
+
+  <!-- ═══════════════════════════════════ ИМЯ -->
+  <div class="section" id="name">
+    <div class="section-label">Блок 2</div>
+    <div class="section-title">🏷 Отображаемое имя</div>
+    <div class="section-desc">Это поле индексируется поиском Instagram — сюда нужны ключевые слова</div>
+
+    <div class="card">
+      <div class="card-title">Варианты</div>
+      <div style="display:flex; flex-direction:column; gap:10px;">
+        <div style="display:flex; align-items:flex-start; gap:12px; padding:14px; background:var(--bg3); border-radius:10px; border:1px solid rgba(255,107,43,0.25);">
+          <span style="background:var(--orange); color:white; font-size:10px; font-weight:700; padding:3px 8px; border-radius:4px; text-transform:uppercase; flex-shrink:0; margin-top:2px;">★ Топ</span>
+          <div>
+            <div style="font-size:16px; font-weight:700; margin-bottom:4px;">Три Ракетки | Сквош Бадминтон Падел</div>
+            <div style="font-size:13px; color:var(--text-muted);">Три ключевых слова по видам спорта — максимальный охват поиска. Сразу ясно что за магазин</div>
+          </div>
+        </div>
+        <div style="display:flex; align-items:flex-start; gap:12px; padding:14px; background:var(--bg3); border-radius:10px;">
+          <span style="background:var(--bg2); color:var(--text-muted); font-size:10px; font-weight:700; padding:3px 8px; border-radius:4px; text-transform:uppercase; flex-shrink:0; margin-top:2px; border:1px solid var(--border);">Alt</span>
+          <div>
+            <div style="font-size:16px; font-weight:700; margin-bottom:4px;">Три Ракетки Пермь 🏸⚫🟡</div>
+            <div style="font-size:13px; color:var(--text-muted);">Добавляет геолокацию — важно для местной аудитории. Эмодзи = визуальные маркеры трёх спортов</div>
+          </div>
+        </div>
+        <div style="display:flex; align-items:flex-start; gap:12px; padding:14px; background:var(--bg3); border-radius:10px;">
+          <span style="background:var(--bg2); color:var(--text-muted); font-size:10px; font-weight:700; padding:3px 8px; border-radius:4px; text-transform:uppercase; flex-shrink:0; margin-top:2px; border:1px solid var(--border);">Alt</span>
+          <div>
+            <div style="font-size:16px; font-weight:700; margin-bottom:4px;">Three Rackets · Sport Store</div>
+            <div style="font-size:13px; color:var(--text-muted);">Бренд на английском — если курс на международный образ. Совпадает с названием собственной марки одежды</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="section-divider"></div>
+
+  <!-- ═══════════════════════════════════ BIO -->
+  <div class="section" id="bio">
+    <div class="section-label">Блок 3</div>
+    <div class="section-title">📝 Описание профиля (Bio)</div>
+    <div class="section-desc">3 варианта · до 150 символов · готово к копированию</div>
+
+    <div class="bio-variants">
+
+      <!-- Bio 1 -->
+      <div class="bio-card">
+        <div class="bio-card-header">
+          <div class="bio-style-name">★ Дерзкий / Бренд</div>
+          <div class="bio-chars">97 символов ✓</div>
+        </div>
+        <div class="bio-mockup">
+          <div class="bio-mock-name">Три Ракетки | Сквош Бадминтон Падел</div>
+          <div class="bio-mock-text">Ракетки. Форма. Игра. 🎯
+Сквош · Бадминтон · Падел в Перми
+Мы сами играем — знаем что продаём
+↓ Магазин + тесты</div>
+          <div class="bio-mock-link">🌐 triraketki.ru</div>
+        </div>
+        <div class="bio-note">💡 Лучший вариант под «дерзкий бренд + живое сообщество». Три спорта, Пермь, фишка «мы играем» — всё в четырёх строках</div>
+      </div>
+
+      <!-- Bio 2 -->
+      <div class="bio-card">
+        <div class="bio-card-header">
+          <div class="bio-style-name">Сообщество / Живой</div>
+          <div class="bio-chars">104 символа ✓</div>
+        </div>
+        <div class="bio-mockup">
+          <div class="bio-mock-name">Три Ракетки | Сквош Бадминтон Падел</div>
+          <div class="bio-mock-text">Магазин для тех, кто живёт кортом 🏸⚫🟡
+Сквош, бадминтон, падел — всё для игры
+Тестируем каждую ракетку сами
+↓ triraketki.ru</div>
+          <div class="bio-mock-link">🌐 triraketki.ru</div>
+        </div>
+        <div class="bio-note">💡 «Живёт кортом» — языком аудитории. Подчёркивает экспертизу через тест</div>
+      </div>
+
+      <!-- Bio 3 -->
+      <div class="bio-card">
+        <div class="bio-card-header">
+          <div class="bio-style-name">Прямой / Продающий</div>
+          <div class="bio-chars">88 символов ✓</div>
+        </div>
+        <div class="bio-mockup">
+          <div class="bio-mock-name">Три Ракетки | Сквош Бадминтон Падел</div>
+          <div class="bio-mock-text">Сквош · Бадминтон · Падел 🏸⚫🟡
+Инвентарь + бренд Three Rackets
+Пермь | Доставка по России
+↓ Выбрать ракетку</div>
+          <div class="bio-mock-link">🌐 triraketki.ru</div>
+        </div>
+        <div class="bio-note">💡 Самый прямой — для тех, кто ищет конкретный товар. Упоминает собственный бренд</div>
+      </div>
+
+    </div>
+  </div>
+
+  <div class="section-divider"></div>
+
+  <!-- ═══════════════════════════════════ ССЫЛКА -->
+  <div class="section" id="link">
+    <div class="section-label">Блок 4</div>
+    <div class="section-title">🔗 Ссылка в профиле</div>
+    <div class="section-desc">Рекомендация: <strong class="orange">Taplink</strong> — несколько точек входа для разных типов покупателей</div>
+
+    <div style="display:flex; gap:20px; align-items:flex-start; flex-wrap:wrap;">
+      <div>
+        <div class="taplink-mock">
+          <div style="text-align:center; margin-bottom:16px;">
+            <div style="font-size:15px; font-weight:700;">Три Ракетки 🏸⚫🟡</div>
+            <div style="font-size:12px; color:var(--text-muted);">Сквош · Бадминтон · Падел</div>
+          </div>
+          <div class="taplink-btn"><span class="btn-icon">🛒</span> Перейти в магазин</div>
+          <div class="taplink-btn"><span class="btn-icon">💬</span> Написать в Telegram</div>
+          <div class="taplink-btn"><span class="btn-icon">🎬</span> Тесты и обзоры</div>
+          <div class="taplink-btn"><span class="btn-icon">👕</span> Бренд Three Rackets</div>
+          <div class="taplink-btn"><span class="btn-icon">📍</span> Мы в Перми</div>
+        </div>
+      </div>
+      <div style="flex:1; min-width:200px;">
+        <div class="card">
+          <div class="card-title">Почему Taplink, а не прямая ссылка</div>
+          <ul style="list-style:none; display:flex; flex-direction:column; gap:8px;">
+            <li style="font-size:13px; padding-left:18px; position:relative;"><span style="position:absolute;left:0;color:var(--orange);">→</span> У вас 3 спорта + бренд одежды — одна ссылка не охватит всё</li>
+            <li style="font-size:13px; padding-left:18px; position:relative;"><span style="position:absolute;left:0;color:var(--orange);">→</span> Telegram-ссылка снижает барьер для заказа через директ</li>
+            <li style="font-size:13px; padding-left:18px; position:relative;"><span style="position:absolute;left:0;color:var(--orange);">→</span> Taplink даёт аналитику — видите откуда приходят</li>
+            <li style="font-size:13px; padding-left:18px; position:relative;"><span style="position:absolute;left:0;color:var(--orange);">→</span> Кнопка «Тесты и обзоры» ведёт на Reels — удерживает аудиторию</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="section-divider"></div>
+
+  <!-- ═══════════════════════════════════ АВАТАРКА -->
+  <div class="section" id="avatar">
+    <div class="section-label">Блок 5</div>
+    <div class="section-title">🖼 Аватарка</div>
+    <div class="section-desc">Бренд с душой — не просто логотип</div>
+
+    <div style="background:var(--bg2);border:1px solid rgba(255,107,43,0.25);border-radius:14px;padding:18px 20px;margin-bottom:16px;">
+      <div style="font-size:12px;font-weight:700;color:var(--orange);text-transform:uppercase;letter-spacing:0.08em;margin-bottom:8px;">★ Рекомендуем</div>
+      <div style="font-size:14px;line-height:1.7;">
+        <strong>Экшн-фото</strong>: кто-то из команды в игре (бадминтон или сквош) — ракетка в руке, движение, энергия. Лицо занимает 60%+ кадра. Фирменная форма <strong class="orange">Three Rackets</strong> на игроке — два зайца одним выстрелом: бренд виден с первого взгляда.
+      </div>
+    </div>
+
+    <div class="avatar-grid">
+      <div class="av-card">
+        <div class="av-title good">✓ Что должно быть</div>
+        <ul class="av-list">
+          <li>Один человек (не группа), лицо читается</li>
+          <li>Форма Three Rackets или яркий спортивный образ</li>
+          <li>Динамика — замах, прыжок, игровой момент</li>
+          <li>Контрастный фон (корт, стена) — лицо выделяется</li>
+          <li>Хорошее освещение, резкость на лице</li>
+          <li>Разрешение 1080×1080 и выше</li>
+        </ul>
+      </div>
+      <div class="av-card avoid">
+        <div class="av-title bad">✗ Чего избегать</div>
+        <ul class="av-list">
+          <li>Просто логотип — безлично, как у всех конкурентов</li>
+          <li>Групповое фото — лицо теряется в маленьком кружке</li>
+          <li>Фото товара (ракетки) без человека</li>
+          <li>Тёмный фон + тёмная одежда — не читается</li>
+          <li>Зернистость или размытость</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="card mt16">
+      <div class="card-title">Альтернатива если экшн-фото нет прямо сейчас</div>
+      <div style="font-size:14px; color:var(--text-muted);">Логотип Three Rackets на <strong style="color:var(--text);">ярко-оранжевом</strong> или <strong style="color:var(--text);">чёрном</strong> фоне — минималистично, запоминается. Главное — не мелкий логотип на белом, как у конкурентов. Только потом — заменить на живое фото.</div>
+    </div>
+  </div>
+
+  <div class="section-divider"></div>
+
+  <!-- ═══════════════════════════════════ АКТУАЛЬНЫЕ -->
+  <div class="section" id="highlights">
+    <div class="section-label">Блок 6</div>
+    <div class="section-title">📌 Актуальные (Highlights)</div>
+    <div class="section-desc">7 папок · первые 4 видны без прокрутки — они самые важные</div>
+
+    <div class="highlights-grid">
+      <div class="hl-card priority">
+        <span class="hl-priority">1 · виден всегда</span>
+        <span class="hl-emoji">🎬</span>
+        <div class="hl-name">ТЕСТЫ</div>
+        <div class="hl-desc">Видео и сторис с испытаниями товаров. Главная фишка — сюда направлять из bio и постов</div>
+      </div>
+      <div class="hl-card priority">
+        <span class="hl-priority">2 · виден всегда</span>
+        <span class="hl-emoji">🏪</span>
+        <div class="hl-name">КАТАЛОГ</div>
+        <div class="hl-desc">Ракетки, воланы, мячи — по видам спорта. Ссылка на категории сайта</div>
+      </div>
+      <div class="hl-card priority">
+        <span class="hl-priority">3 · виден всегда</span>
+        <span class="hl-emoji">👕</span>
+        <div class="hl-name">THREE RACKETS</div>
+        <div class="hl-desc">Собственный бренд одежды. Фото, описание, как купить — маржинальный продукт заслуживает отдельного highlight</div>
+      </div>
+      <div class="hl-card priority">
+        <span class="hl-priority">4 · виден всегда</span>
+        <span class="hl-emoji">⭐</span>
+        <div class="hl-name">ОТЗЫВЫ</div>
+        <div class="hl-desc">Скриншоты отзывов, переписок, фото клиентов с покупкой. Социальное доказательство</div>
+      </div>
+      <div class="hl-card">
+        <span class="hl-emoji">🏸</span>
+        <div class="hl-name">БАДМИНТОН</div>
+        <div class="hl-desc">Отдельная папка под самый ходовой товар. Ракетки Yonex, Li-Ning, советы по выбору</div>
+      </div>
+      <div class="hl-card">
+        <span class="hl-emoji">🟡</span>
+        <div class="hl-name">ПАДЕЛ</div>
+        <div class="hl-desc">Растущая ниша — конкуренты не покрывают. Adidas, Bullpadel, что такое падел, корты Перми</div>
+      </div>
+      <div class="hl-card">
+        <span class="hl-emoji">👋</span>
+        <div class="hl-name">О НАС</div>
+        <div class="hl-desc">Команда, история магазина, почему создали три ракетки. Мы тоже играем — сюда</div>
+      </div>
+    </div>
+
+    <div class="card mt16">
+      <div class="card-title">Оформление обложек</div>
+      <div style="font-size:14px; color:var(--text-muted); line-height:1.7;">Единый стиль: <strong style="color:var(--text);">чёрный фон + оранжевый акцент</strong> — цвета бренда. Иконки спорта или буквы. Сделать в Canva за 30 минут. Шаблон: однотонный круг + эмодзи или короткое слово. Не пёстро — узнаваемо.</div>
+    </div>
+  </div>
+
+  <div class="section-divider"></div>
+
+  <!-- ═══════════════════════════════════ ЗАКРЕП -->
+  <div class="section" id="pinned">
+    <div class="section-label">Блок 7</div>
+    <div class="section-title">📍 Закреп (3 поста)</div>
+    <div class="section-desc">Мини-лендинг профиля — новый посетитель видит это первым</div>
+
+    <div class="pinned-grid">
+      <div class="pin-card">
+        <div class="pin-header">
+          <div class="pin-number">1</div>
+          <div class="pin-type">Знакомство</div>
+        </div>
+        <div class="pin-body">
+          <div class="pin-hook">Мы открыли магазин, потому что сами не могли найти нормальный инвентарь в Перми</div>
+          <ul class="pin-list">
+            <li>История появления Три Ракетки</li>
+            <li>Команда — кто играет и в какие виды</li>
+            <li>Почему именно три спорта</li>
+            <li>Что делает нас не просто магазином</li>
+            <li>CTA: подпишись, если играешь</li>
+          </ul>
+          <div class="pin-format">📱 Формат: Reels 60-90 сек или карусель «наша история»</div>
+        </div>
+      </div>
+
+      <div class="pin-card">
+        <div class="pin-header">
+          <div class="pin-number">2</div>
+          <div class="pin-type">Экспертиза / Тест</div>
+        </div>
+        <div class="pin-body">
+          <div class="pin-hook">Тест: 5 ракеток для бадминтона до 5000 рублей — честный разбор от игрока</div>
+          <ul class="pin-list">
+            <li>Сравнение конкретных моделей</li>
+            <li>Кому подходит каждая</li>
+            <li>Наш выбор и почему</li>
+            <li>Ссылка на сайт в конце</li>
+          </ul>
+          <div class="pin-format">🎬 Формат: Reels с тестом в руках или карусель 8-10 слайдов</div>
+        </div>
+      </div>
+
+      <div class="pin-card">
+        <div class="pin-header">
+          <div class="pin-number">3</div>
+          <div class="pin-type">Бренд / Оффер</div>
+        </div>
+        <div class="pin-body">
+          <div class="pin-hook">Three Rackets — форма, в которой мы играем сами. Теперь можно купить</div>
+          <ul class="pin-list">
+            <li>Что такое Three Rackets brand</li>
+            <li>Из чего сделана одежда, для каких спортов</li>
+            <li>Как выглядит на корте (фото/видео)</li>
+            <li>Цена и как заказать → triraketki.ru</li>
+          </ul>
+          <div class="pin-format">👕 Формат: фото в форме на корте + текст-история бренда</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="section-divider"></div>
+
+  <!-- ═══════════════════════════════════ КОНТЕНТ-ПЛАН -->
+  <div class="section" id="content">
+    <div class="section-label">Блок 8</div>
+    <div class="section-title">📅 Контент-план</div>
+    <div class="section-desc">Система, а не хаос — рубрики + частота + первая неделя</div>
+
+    <!-- Рубрики -->
+    <div style="font-size:13px;font-weight:700;color:var(--text-muted);text-transform:uppercase;letter-spacing:0.08em;margin-bottom:14px;">Постоянные рубрики (6 штук)</div>
+    <div class="rubric-grid">
+      <div class="rubric-card">
+        <div class="rubric-icon">🎬</div>
+        <div>
+          <div class="rubric-name">Тесты и обзоры</div>
+          <div class="rubric-note">Главная фишка. Испытания товара в игре, сравнения, честные оценки. Именно это у конкурентов отсутствует</div>
+        </div>
+      </div>
+      <div class="rubric-card">
+        <div class="rubric-icon">📦</div>
+        <div>
+          <div class="rubric-name">Товары и новинки</div>
+          <div class="rubric-note">Анонсы поступлений, карусели с ассортиментом, «хит месяца», ссылка на сайт</div>
+        </div>
+      </div>
+      <div class="rubric-card">
+        <div class="rubric-icon">👕</div>
+        <div>
+          <div class="rubric-name">Three Rackets Brand</div>
+          <div class="rubric-note">Жизнь бренда — новые коллекции, фото с кортов, «одежда в деле». Отдельная рубрика = статус</div>
+        </div>
+      </div>
+      <div class="rubric-card">
+        <div class="rubric-icon">🏆</div>
+        <div>
+          <div class="rubric-name">Советы и лайфхаки</div>
+          <div class="rubric-note">Как выбрать ракетку, когда менять струны, разница между уровнями воланов — контент, который сохраняют</div>
+        </div>
+      </div>
+      <div class="rubric-card">
+        <div class="rubric-icon">🤝</div>
+        <div>
+          <div class="rubric-name">Сообщество</div>
+          <div class="rubric-note">Турниры Перми, клиенты за игрой, «кто с нами играет». Показывает живость бренда</div>
+        </div>
+      </div>
+      <div class="rubric-card">
+        <div class="rubric-icon">🎭</div>
+        <div>
+          <div class="rubric-name">За кадром</div>
+          <div class="rubric-note">Жизнь магазина, команда, как выбираем товар, приход новой коллекции. Доверие через личность</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Частота -->
+    <div style="font-size:13px;font-weight:700;color:var(--text-muted);text-transform:uppercase;letter-spacing:0.08em;margin:24px 0 14px;">Частота публикаций</div>
+    <div class="freq-row">
+      <div class="freq-card">
+        <div class="freq-num">4–5</div>
+        <div class="freq-label">постов в неделю</div>
+      </div>
+      <div class="freq-card">
+        <div class="freq-num">5–7</div>
+        <div class="freq-label">сторис в день</div>
+      </div>
+      <div class="freq-card">
+        <div class="freq-num">2–3</div>
+        <div class="freq-label">Reels в неделю</div>
+      </div>
+    </div>
+
+    <!-- Соотношение -->
+    <div class="mix-bar">
+      <div class="mix-title">Соотношение контента</div>
+      <div class="mix-row">
+        <div class="mix-label">🎬 Тесты / советы / польза</div>
+        <div class="mix-track"><div class="mix-fill" style="width:40%;background:var(--orange);"></div></div>
+        <div class="mix-pct">40%</div>
+      </div>
+      <div class="mix-row">
+        <div class="mix-label">📦 Товары / бренд</div>
+        <div class="mix-track"><div class="mix-fill" style="width:30%;background:var(--purple);"></div></div>
+        <div class="mix-pct">30%</div>
+      </div>
+      <div class="mix-row">
+        <div class="mix-label">🤝 Сообщество / за кадром</div>
+        <div class="mix-track"><div class="mix-fill" style="width:20%;background:var(--green);"></div></div>
+        <div class="mix-pct">20%</div>
+      </div>
+      <div class="mix-row">
+        <div class="mix-label">💰 Прямые продажи / CTA</div>
+        <div class="mix-track"><div class="mix-fill" style="width:10%;background:#fbbf24;"></div></div>
+        <div class="mix-pct">10%</div>
+      </div>
+    </div>
+
+    <!-- Неделя 1 -->
+    <div style="font-size:13px;font-weight:700;color:var(--text-muted);text-transform:uppercase;letter-spacing:0.08em;margin:0 0 14px;">Сетка первой недели</div>
+    <div class="week-grid">
+      <div class="week-row">
+        <div class="week-day">Пн</div>
+        <div class="week-content"><span class="week-tag wtag-test">Тест</span> Reels: «Тестируем 3 ракетки для бадминтона под разные стили игры — честно»</div>
+      </div>
+      <div class="week-row">
+        <div class="week-day">Вт</div>
+        <div class="week-content"><span class="week-tag wtag-personal">За кадром</span> Сторис: команда на тренировке + опрос «В какой спорт хочешь попасть?»</div>
+      </div>
+      <div class="week-row">
+        <div class="week-day">Ср</div>
+        <div class="week-content"><span class="week-tag wtag-product">Товары</span> Карусель: «5 причин попробовать падел в 2025 году» + наш ассортимент</div>
+      </div>
+      <div class="week-row">
+        <div class="week-day">Чт</div>
+        <div class="week-content"><span class="week-tag wtag-test">Совет</span> Пост: «Как выбрать первую ракетку для сквоша — 4 параметра, которые важны»</div>
+      </div>
+      <div class="week-row">
+        <div class="week-day">Пт</div>
+        <div class="week-content"><span class="week-tag wtag-brand">Three Rackets</span> Reels: «Наша форма на корте — как создавался бренд для тех, кто играет»</div>
+      </div>
+      <div class="week-row">
+        <div class="week-day">Сб</div>
+        <div class="week-content"><span class="week-tag wtag-community">Сообщество</span> Фото с турнира или игровой встречи в Перми + тег участников</div>
+      </div>
+      <div class="week-row">
+        <div class="week-day">Вс</div>
+        <div class="week-content"><span class="week-tag wtag-product">Продажа</span> Пост-карусель: «Хиты недели» — топ-3 товара со ссылкой на triraketki.ru</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="section-divider"></div>
+
+  <!-- ═══════════════════════════════════ ЧЕКЛИСТ -->
+  <div class="section" id="checklist">
+    <div class="section-label">Финал</div>
+    <div class="section-title">✅ Чеклист запуска</div>
+    <div class="section-desc">Что сделать сегодня и на этой неделе</div>
+
+    <div class="checklist">
+      <div class="checklist-header">🔥 Сегодня (занимает 40–60 минут)</div>
+
+      <div class="cl-item">
+        <div class="cl-box"></div>
+        <div class="cl-text">
+          Проверить и сменить никнейм на <strong>@triraketki</strong>
+          <span>Зайди на instagram.com/triraketki — если свободен, занять</span>
+        </div>
+        <div class="cl-priority p-hot">Сейчас</div>
+      </div>
+      <div class="cl-item">
+        <div class="cl-box"></div>
+        <div class="cl-text">
+          Обновить имя: <strong>Три Ракетки | Сквош Бадминтон Падел</strong>
+          <span>Это поле индексируется поиском — до 30 символов</span>
+        </div>
+        <div class="cl-priority p-hot">Сейчас</div>
+      </div>
+      <div class="cl-item">
+        <div class="cl-box"></div>
+        <div class="cl-text">
+          Переписать bio по <strong>Варианту 1</strong> (дерзкий/бренд)
+          <span>Скопируй готовый текст из раздела Bio выше</span>
+        </div>
+        <div class="cl-priority p-hot">Сейчас</div>
+      </div>
+      <div class="cl-item">
+        <div class="cl-box"></div>
+        <div class="cl-text">
+          Настроить <strong>Taplink</strong> с 5 кнопками
+          <span>taplink.cc — бесплатно. Поставить ссылку в профиль вместо прямой ссылки</span>
+        </div>
+        <div class="cl-priority p-hot">Сейчас</div>
+      </div>
+
+      <div class="checklist-header" style="border-top:1px solid var(--border);">📅 На этой неделе</div>
+
+      <div class="cl-item">
+        <div class="cl-box"></div>
+        <div class="cl-text">
+          Снять аватарку — экшн-фото кого-то из команды в форме Three Rackets
+          <span>Корт, ракетка, движение, лицо 60%+ кадра</span>
+        </div>
+        <div class="cl-priority p-week">Неделя</div>
+      </div>
+      <div class="cl-item">
+        <div class="cl-box"></div>
+        <div class="cl-text">
+          Создать 7 обложек для актуальных в Canva
+          <span>Чёрный фон + оранжевый акцент. Тексты: ТЕСТЫ, КАТАЛОГ, THREE RACKETS, ОТЗЫВЫ, БАДМИНТОН, ПАДЕЛ, О НАС</span>
+        </div>
+        <div class="cl-priority p-week">Неделя</div>
+      </div>
+      <div class="cl-item">
+        <div class="cl-box"></div>
+        <div class="cl-text">
+          Записать и опубликовать Reels-знакомство (Закреп №1)
+          <span>«Мы открыли магазин, потому что сами не могли найти нормальный инвентарь»</span>
+        </div>
+        <div class="cl-priority p-week">Неделя</div>
+      </div>
+      <div class="cl-item">
+        <div class="cl-box"></div>
+        <div class="cl-text">
+          Записать тест ракеток (Закреп №2)
+          <span>Сравнение 3–5 моделей бадминтона — самый ходовой товар, максимальный охват</span>
+        </div>
+        <div class="cl-priority p-week">Неделя</div>
+      </div>
+      <div class="cl-item">
+        <div class="cl-box"></div>
+        <div class="cl-text">
+          Опубликовать пост про бренд Three Rackets (Закреп №3)
+          <span>История, фото на корте, ссылка на покупку</span>
+        </div>
+        <div class="cl-priority p-week">Неделя</div>
+      </div>
+      <div class="cl-item">
+        <div class="cl-box"></div>
+        <div class="cl-text">
+          Запустить контент по сетке первой недели
+          <span>Понедельник → первый Reels с тестом ракеток. Вся сетка выше</span>
+        </div>
+        <div class="cl-priority p-week">Неделя</div>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<!-- FOOTER -->
+<div class="footer">
+  Упаковка профиля Instagram для <strong style="color:var(--text);">triraketki.ru</strong> · Пермь · Сквош · Бадминтон · Падел<br>
+  <span style="color:var(--text-dim);">Создано с помощью instagram-profile skill · 2026</span>
+</div>
+
+</body>
+</html>
